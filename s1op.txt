@@ -1,0 +1,62 @@
+Summary of dataset:
+
+<class 'pandas.core.frame.DataFrame'>
+Int64Index: 6335 entries, 0 to 6334
+Data columns (total 4 columns):
+ #   Column      Non-Null Count  Dtype 
+---  ------      --------------  ----- 
+ 0   Unnamed: 0  6335 non-null   int64 
+ 1   title       6335 non-null   object
+ 2   text        6335 non-null   object
+ 3   label       6335 non-null   object
+dtypes: int64(1), object(3)
+memory usage: 247.5+ KB
+None
+
+
+Dataset values:
+
+      Unnamed: 0  ... label
+807         5329  ...  FAKE
+2572        3444  ...  REAL
+4848        8968  ...  FAKE
+1817         507  ...  REAL
+5134        9881  ...  FAKE
+
+[5 rows x 4 columns]
+
+
+Accuracy score:	 0.9305555555555556
+
+
+Confusion matrix:
+ [[754  38]
+ [ 72 720]]
+
+
+Final Report:	
+              precision    recall  f1-score   support
+
+        FAKE       0.91      0.95      0.93       792
+        REAL       0.95      0.91      0.93       792
+
+    accuracy                           0.93      1584
+   macro avg       0.93      0.93      0.93      1584
+weighted avg       0.93      0.93      0.93      1584
+
+
+Training time:	 51.82223987579346
+
+Prediction time:	 16.562734365463257
+Enter input to predict:
+Enter input to predict:"New Wikileaks email dumps have revealed massive corruption surrounding Hillary Clinton campaign chair John Podesta . In one email dated February 29, 2016, an article sent by Hillary advisor Sara Solow to Podesta and Hillary’s foreign policy advisor Jake Sullivan indicates that the Clinton campaign is considering House Speaker Paul Ryan’s relative for the Supreme Court . 
+Ketanji Brown is the subject of the article. She is related to Paul Ryan by marriage and is a judge on the US District Court for the District of Columbia. 
+The email reads, “She was confirmed by without any Republican opposition in the Senate not once, but *twice*. She was confirmed to her current position in 2013 by unanimous consent – that is, without any stated opposition. She was also previously confirmed unanimously to a seat on the U.S. Sentencing Commission (where she became vice chair).” 
+“Her family is impressive. She is married to a surgeon and has two young daughters. Her father is a retired lawyer and her mother a retired school principal. Her brother was a police officer (in the unit that was the basis for the television show * The Wire *) and is now a law student, and she is related by marriage to Congressman (and Speaker of the House) Paul Ryan.” 
+Earlier this month, he even said he would not campaign for nor support his party’s nominee, Donald Trump . In fact, some supporters of Trump have theorized that Ryan was somehow behind or involved in the leak of the tape in which Trump made sexually crude comments about women. 
+If you claim this is merely circumstantial, then I think there is no hope for you understanding just how corrupt DC has gotten, and this is the very Paul Ryan I warned you about in 2012, which everyone said was “so conservative.” Sadly, many didn’t listen and voted for liberal Mitt Romney and him. Perhaps Paul Ryan’s records and emails should be leaked and maybe we just might see that he’s willing to engage Hillary in a pay-to-play scheme . 
+Courtesy of Freedom Outpost 
+Tim Brown is an author and Editor at FreedomOutpost.com , SonsOfLibertyMedia.com , GunsInTheNews.com and TheWashingtonStandard.com . He is husband to his “more precious than rubies” wife, father of 10 “mighty arrows”, jack of all trades, Christian and lover of liberty. He resides in the U.S. occupied Great State of South Carolina. Tim is also an affiliate for the Joshua Mark 5 AR/AK hybrid semi-automatic rifle . Follow Tim on Twitter . Don't forget to follow the D.C. Clothesline on Facebook and Twitter. PLEASE help spread the word by sharing our articles on your favorite social networks. Share this:"
+
+
+predicted output is:	 ['FAKE']

@@ -1,0 +1,53 @@
+#importing modules
+from sklearn.pipeline import Pipeline
+from sklearn.svm import SVC
+import pandas as pd
+import time as t
+from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import CountVectorizer,TfidfTransformer
+
+#reading dataset
+df=pd.read_csv('D:/kishore/fake_or_real_news.csv')
+df.dropna(inplace=True)
+
+#dataset values
+print('Summary of dataset:\n')
+print(df.info())
+
+print('\n\nDataset values:\n')
+print(df.sample(frac=1).head())
+
+#splitting dataset into training nad testing
+x,y=df['text'].tolist(),df['label'].tolist()
+xtrain,xtest,ytrain,ytest=train_test_split(x,y)
+
+#using classifier
+tclf=Pipeline([('vect',CountVectorizer()),('tfidf',TfidfTransformer()),('clf',SVC(kernel='linear'))])
+
+t0=t.time()
+tclf.fit(xtrain,ytrain)
+t1=t.time()
+
+pred=tclf.predict(xtest)
+t2=t.time()
+
+from sklearn.metrics import accuracy_score,confusion_matrix,classification_report
+
+print('\n\nAccuracy score:\t',accuracy_score(ytest,pred))
+
+res=confusion_matrix(ytest,pred)
+print('\n\nConfusion matrix:\n',res)
+
+print('\n\nFinal Report:\t')
+print(classification_report(ytest,pred))
+
+
+print('\nTraining time:\t',t1-t0)
+print('\nPrediction time:\t',t2-t1)
+
+
+q=[input('Enter input to predict:\n')]
+tc=Pipeline([('vect',CountVectorizer()),('tfidf',TfidfTransformer()),('clf',SVC(kernel='linear'))])
+tc.fit(xtrain,ytrain)
+p=tc.predict(q)
+print('\npredicted output is:\t',p)

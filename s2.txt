@@ -1,0 +1,58 @@
+#importing datasets
+from sklearn.pipeline import Pipeline
+from sklearn.svm import SVC
+import pandas as pd
+import time as t
+from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import CountVectorizer,TfidfTransformer
+
+#dataset 
+df=pd.read_csv('D:/kishore/train.csv')
+df.dropna(inplace=True)
+
+#summary of dataset
+print('Summary of dataset:\n')
+print(df.info())
+
+print('\n\nDataset values:\n')
+print(df.sample(frac=1).head())
+
+
+df['label']=df['label'].astype('object')
+df1=df[:10000]
+print(df1.info())
+
+#splitting dataset into training and testing
+x,y=df1['text'].tolist(),df1['label'].tolist()
+xtrain,xtest,ytrain,ytest=train_test_split(x,y)
+
+
+tclf=Pipeline([('vect',CountVectorizer()),('tfidf',TfidfTransformer()),('clf',SVC(kernel='linear'))])
+
+t0=t.time()
+tclf.fit(xtrain,ytrain)
+t1=t.time()
+
+pred=tclf.predict(xtest)
+t2=t.time()
+
+from sklearn.metrics import accuracy_score,confusion_matrix,classification_report
+
+print('\n\nAccuracy score:\t',accuracy_score(ytest,pred))
+
+res=confusion_matrix(ytest,pred)
+print('\n\nConfusion matrix:\n',res)
+
+print('\n\nFinal Report:\t')
+print(classification_report(ytest,pred))
+
+
+print('\nTraining time:\t',t1-t0)
+print('\nPrediction time:\t',t2-t1)
+
+
+q=[input('Enter input to predict:\n')]
+tc=Pipeline([('vect',CountVectorizer()),('tfidf',TfidfTransformer()),('clf',SVC(kernel='linear'))])
+tc.fit(xtrain,ytrain)
+p=tc.predict(q)
+print('\npredicted output is:\t',p)
