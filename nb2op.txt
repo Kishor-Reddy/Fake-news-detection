@@ -1,0 +1,64 @@
+summary of dataset:
+
+<class 'pandas.core.frame.DataFrame'>
+Int64Index: 20800 entries, 0 to 20799
+Data columns (total 4 columns):
+ #   Column  Non-Null Count  Dtype 
+---  ------  --------------  ----- 
+ 0   title   20242 non-null  object
+ 1   author  18843 non-null  object
+ 2   text    20761 non-null  object
+ 3   label   20800 non-null  int64 
+dtypes: int64(1), object(3)
+memory usage: 812.5+ KB
+None
+
+
+Dataset values
+
+                                                   title  ... label
+id                                                        ...      
+11749  Life: 6 Apple-Picking No-No�s To Avoid If You ...  ...     1
+8981   Blog: We Need To Teach Our Sons That Being Con...  ...     1
+17439  The 5 Biggest Seed-Starting Mistakes That Peop...  ...     1
+20648  Comment on Are You On Pace To Reach Your Goals...  ...     1
+1841   O�Reilly: Liberal Sports Media Turned Trump-Br...  ...     0
+
+[5 rows x 4 columns]
+
+
+Accuracy score:
+ 0.9476923076923077
+[[2531   82]
+ [ 190 2397]]
+
+
+Final report:
+              precision    recall  f1-score   support
+
+           0       0.93      0.97      0.95      2613
+           1       0.97      0.93      0.95      2587
+
+    accuracy                           0.95      5200
+   macro avg       0.95      0.95      0.95      5200
+weighted avg       0.95      0.95      0.95      5200
+
+
+Training time:	 17.37526845932007
+
+Prediction time:	 0.04684138298034668
+
+
+Enter input to predict
+"Humiliated Hillary Tries To Hide What Camera Caught 15 Mins Before Rally Posted on October 27, 2016 by Amanda Shea in Politics Share This Hillary Clinton outside rally (left), Fox News catching incident on live feed (right) 
+Both presidential candidates stopped in the battleground state of Florida this week to campaign for votes to crowds at separate locations. However, things didn’t go so well for Hillary Clinton, who was humiliated when a camera caught what she immediately tried to hide to save her campaign — which backfired big time. 
+While Donald Trump’s 15,000-person army of “Deplorables” were holding down the fort in Stanford, Florida as they listened to this great leader explain how he plans to make America great again, Hillary was at a much smaller venue at Palm Beach State College. Although she was feeling pretty good about herself with having a higher turnout than she’s used to, the approximate 1,000 to 2,000 attendees paled in comparison to what Trump was looking at in the same state. However, Hillary’s anemic crowd was enough to be publicly mocked in front of. 
+Perhaps Hillary didn’t think anyone would notice, but Fox Business Network was watching — and commenting — live. With just fifteen minutes before the Democratic candidate was set to take the stage in one of her final and most important rallies, the small room should have been jam-packed with people. As the humored hosts noted on the news show, that was far from the case. 
+“Here it is nowhere near the size of the crowd we saw in Sanford, Florida yesterday for Mr. Trump, 15,000. There’s maybe a thousand to two thousand people here today,” one host pointed out much to Hillary’s embarrassment. “The Clinton rallies tend to be much smaller and you can see there’s empty space here and she’s supposed to speak in 15 minutes. And I can tell you that as the camera pans across that if we were at a Trump rally this would absolutely be packed,” the commentators added. 
+No matter how far ahead in the polls Hillary and her lapdog media says she is, the attendance at her events speaks volumes. Nobody cares or is enthusiastic enough about this woman to bother showing up, and those who do have to be coached on how to chant and act excited. 
+On the other hand, there are Trump’s rallies, where so many people turn up to venues four times the size as Hillary’s that these massive stadiums can’t contain everyone who is eager to come, and some are turned away. If the turnout at the rallies is any indicator of what’s expected at the polls, Hillary can’t win, and if she does, Americans should definitely question how that could even happen"
+
+
+
+predicted result is: real
+

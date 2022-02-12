@@ -1,0 +1,97 @@
+#importing modules
+import numpy as np
+import pandas as pd
+
+#taking dataset into data frame
+df=pd.read_csv('D:/kishore/fake_or_real_news.csv',index_col="Unnamed: 0")
+
+
+#printing summary of dataset
+print('summary of dataset:\n')
+print(df.info())
+
+print('\n\nDataset values\n')
+print(df.sample(frac=1).head())
+
+x=df[['title','text']]
+y=df['label']
+
+#splitting dataset into training and testing
+from sklearn import model_selection
+trainx,testx,trainy,testy=model_selection.train_test_split(x,y)
+
+
+from sklearn.feature_extraction.text import CountVectorizer,TfidfTransformer
+from sklearn.naive_bayes import MultinomialNB
+import time as t
+
+
+count_vectorizer=CountVectorizer()
+
+#using classifier
+counts=count_vectorizer.fit_transform(df['text'].values,df['title'].values)
+
+tf=TfidfTransformer()
+xtf=tf.fit_transform(counts)
+
+classifier=MultinomialNB()
+
+
+targets=df['label'].values
+t0=t.time()
+classifier.fit(counts,targets)
+t1=t.time()
+
+b=classifier.predict(xtf)
+t2=t.time()
+
+    
+
+print('\n\nOutput labels are:\n',classifier.classes_)
+
+print('\n\nCount of output labels:\n',classifier.class_count_)
+
+
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import classification_report
+
+
+dn=testx['text']
+xnc=count_vectorizer.transform(dn)
+xnt=tf.transform(xnc)
+pred=classifier.predict(xnt)
+print('\n\nAccuracy score:\t',accuracy_score(testy,pred))
+r=confusion_matrix(testy,pred)
+print('\n\nConfusion matrix:\t')
+print(r)
+print('\n\nFinal report:\t')
+print(classification_report(testy,pred))
+
+print('\nTraining time:\t',t1-t0)
+print('\nPrediction time:\t',t2-t1)
+
+
+
+
+dnn=[input('\n\nEnter input to predict\n')]
+xncc=count_vectorizer.transform(dnn)
+xntt=tf.transform(xncc)
+pr=classifier.predict(xntt)
+print('\n\npredicted result is:\n',pr)
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+

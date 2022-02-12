@@ -1,0 +1,98 @@
+#importing modules 
+import pandas as pd
+
+#readng dataset into dataframe
+df=pd.read_csv('D:/kishore/train.csv',index_col="id")
+
+#summary of dataset
+print('summary of dataset:\n')
+print(df.info())
+
+print('\n\nDataset values\n')
+print(df.sample(frac=1).head())
+
+x=df[['title','text','author']]
+y=df['label']
+
+from sklearn import model_selection
+#splitting dataset into training and testing
+trainx,testx,trainy,testy=model_selection.train_test_split(x,y)
+
+
+from sklearn.feature_extraction.text import CountVectorizer,TfidfTransformer
+from sklearn.naive_bayes import MultinomialNB
+import time as t
+
+
+count_vectorizer=CountVectorizer()
+
+#using classifier
+counts=count_vectorizer.fit_transform(df['text'].values.astype('U'),df['title'].values.astype('U'))
+
+tf=TfidfTransformer()
+
+#xtf=tf.fit_transform(counts)
+
+classifier=MultinomialNB()
+
+
+targets=df['label'].values
+#t0=t.time()
+classifier.fit(counts,targets)
+    
+
+#print('\n\nOutput labels are:\n',classifier.classes_)
+
+#print('\n\nCount of output labels:\n',classifier.class_count_)
+
+
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import classification_report
+
+
+dn=testx['text']
+t0=t.time()
+xnc=count_vectorizer.transform(dn.astype('U'))
+xnt=tf.fit_transform(xnc)
+t1=t.time()
+pred=classifier.predict(xnt)
+t2=t.time()
+print('\n\nAccuracy score:\n',accuracy_score(testy,pred))
+res=confusion_matrix(testy,pred)
+print(res)
+print('\n\nFinal report:')
+print(classification_report(testy,pred))
+
+print('\nTraining time:\t',t1-t0)
+print('\nPrediction time:\t',t2-t1)
+
+
+dnn=[input('\n\nEnter input to predict\n')]
+xncc=count_vectorizer.transform(dn.astype('U'))
+xntt=tf.fit_transform(xncc)
+pr=classifier.predict(xntt)
+
+#print(pr)
+if(pr[-1]=='0'):
+    print('\n\npredicted result is: fake\n',)
+else:
+    print('\n\npredicted result is: real\n')
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
